@@ -1,0 +1,126 @@
+---
+layout: default
+---
+  <div class='row hero'>
+    <div class='container'>
+      <div class='twelve columns'>
+        <a class='electron-word' href='/'>OWASP OWTF</a>
+        <h5>{{ site.description }}</h5>
+      </div>
+    </div>
+  </div>
+
+  <section class='electron-does'>
+    <div class='container'>
+      <div class='row'>
+        <div class='four columns'>
+          <img src='../assets/images/browser.png' width='150px'>
+          <h4>Easy to Use</h4>
+          <p align="left">
+                <li><strong>Web UI.</strong> Now configure and monitor <b>OWTF</b> via a responsive and powerful interface accessible via your browser. The web interface is based on <strong>Twitter Bootstrap</strong>, making it easy to customize.</li>
+                <li>Exposes <i>RESTful APIs</i> to all core <b>OWTF</b> capabilties.</li></p>
+          </p>
+        </div>
+        <div class='four columns'>
+          <img src='../assets/images/fork.png' width='99px'>
+          <h4>Unites popular tools</h4>
+          <p>
+                <li>Instead of implementing yet another spider (a hard job), <b>OWTF</b> will scrub the output of all tools/plugins run to gather as many URLs as possible.</li>
+                <li>Scan by various aggression levels: <b>OWTF</b> supports scans which are based on the <i>aggressiveness</i> of the plugins/tools invoked.</li>
+                <li> <strong>Extensible</strong> <b>OWTF</b> manages tools through <i>'plugins'</i>making it trivial to add new tools. </li>
+        </div>
+        <div class='four columns'>
+          <img src='../assets/images/os-box.png' width='150px'>
+          <h4><b>Kali Linux</b> ready!</h4>
+          <p><li><b>OWTF</b> has been developed keeping <b>Kali Linux</b> in mind, but it also supports other pentesting distros such as <b>Samurai-WTF</b>, etc.</li>
+          <li>Tool paths and configuration can be easily modified in the web interface.</li></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="more-features">
+    <div class='container'>
+      <div class='row'>
+        <div class='twelve columns'>
+          <h3>Unique features</h3>
+        </div>
+      </div>
+
+      <div class='row features'>
+        <div class='two columns offset-by-one'>
+          <span class="mega-octicon octicon-squirrel"></span>
+          <br/>
+          fastest Python MiTM proxy yet!
+        </div>
+        <div class='two columns'>
+          <span class="mega-octicon octicon-bug"></span>
+          <br/>
+          Crash <br/>reporting directly to <a href="https://github.com/owtf/owtf/issues">Github issue tracker</a>
+        </div>
+        <div class='two columns'>
+          <span class="mega-octicon octicon-gift"></span></span>
+          <br/>
+          Comprehensive interactive report at end of each scan
+        </div>
+        <div class='two columns'>
+          <span class="mega-octicon octicon-tools"></span>
+          <br/>
+          Easy plugin-based system; currently 100+ plugins!
+        </div>
+        <div class='two columns'>
+          <span class="mega-octicon octicon-device-desktop"></span>
+          <br/>
+          CLI and web interface
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id='built-on-electron' class='built-on'>
+    <div class='container'>
+      <div class='row'>
+        <div class='ten columns offset-by-one'>
+          <h3>Video: Release preview</h3>
+            <iframe src="https://player.vimeo.com/video/128008174" width="500" height="313" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          </div>
+      </div>
+      <div class='row'><hr>
+        <div class='ten columns offset-by-one'>
+          <h3>Screenshots</h3>
+          <blockquote class="imgur-embed-pub" lang="en" data-id="a/ISOb9"><a href="//imgur.com/a/ISOb9">OWTF 1.0.1 screenshots</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class='get-started'>
+    <div class='container'>
+      <div class='row'>
+        <div id='download' class='twelve columns'>
+          <h3>Getting started with <b>OWTF</b>!</h3>
+        </div>
+        <div class='row'>
+          <div class='ten columns offset-by-one'>
+            <h5>Getting started with OWTF is easy. Install using the <b><i><u>bootstrap script</u></i></b> (see below) or get the bleeding-edge code from <a href='https://github.com/owtf/owtf.git'>Github repo</a> to install from the command line. Full documentation <a href='http://owtf.readthedocs.org/'>here</a>.</h5>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='twelve columns'>
+            <pre><code>
+              wget -N https://raw.githubusercontent.com/owtf/bootstrap-script/master/bootstrap.sh
+
+              chmod +x bootstrap.sh
+
+              ./bootstrap.sh
+            </code></pre>
+
+            <h4 align="center"> or </h4>
+            <pre><code>
+            git clone -b &lt;branch&gt; http://www.github.com/owtf/owtf.git &lt;folder-name&gt;
+            </code></pre>
+          </div>
+        </div>
+        </div>
+    </div>
+  </section>
