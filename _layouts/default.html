@@ -15,6 +15,28 @@
 
     {% include footer.html %}
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="../assets/js/toastr.min.js"></script>
+
+    <script>
+    toastr.success("We have a Trello page! Comment and vote on new upcoming features. See it <a href='https://trello.com/b/NTwFzKBP'> here</a>")
+
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-top-full-width",
+      "preventDuplicates": false,
+      "onclick":   null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "linear",
+      "showMethod": "fadeIn"
+    }
+    </script>
   </body>
 
 </html>
