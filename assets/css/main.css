@@ -1065,3 +1065,12 @@ footer {
 .jump-to-item + .jump-to-item::before {
   content: '○ ';
 }
+
+.trello {
+  font-size:24px;
+  height: auto;
+  color:white;
+  text-align: center;
+  font-style: italic;
+  background-color: darkslategrey;
+}
