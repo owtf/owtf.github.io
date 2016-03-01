@@ -2,7 +2,7 @@
   {
     "url": "https://api.github.com/repos/owtf/owtf/releases/626736",
     "assets_url": "https://api.github.com/repos/owtf/owtf/releases/626736/assets",
-    "upload_url": "https://uploads.github.com/repos/owtf/owtf/releases/626736/assets{?name}",
+    "upload_url": "https://uploads.github.com/repos/owtf/owtf/releases/626736/assets{?name,label}",
     "html_url": "https://github.com/owtf/owtf/releases/tag/v1.0.1",
     "id": 626736,
     "tag_name": "v1.0.1",
@@ -39,7 +39,7 @@
   {
     "url": "https://api.github.com/repos/owtf/owtf/releases/604485",
     "assets_url": "https://api.github.com/repos/owtf/owtf/releases/604485/assets",
-    "upload_url": "https://uploads.github.com/repos/owtf/owtf/releases/604485/assets{?name}",
+    "upload_url": "https://uploads.github.com/repos/owtf/owtf/releases/604485/assets{?name,label}",
     "html_url": "https://github.com/owtf/owtf/releases/tag/v1.0",
     "id": 604485,
     "tag_name": "v1.0",
@@ -76,7 +76,7 @@
   {
     "url": "https://api.github.com/repos/owtf/owtf/releases/146842",
     "assets_url": "https://api.github.com/repos/owtf/owtf/releases/146842/assets",
-    "upload_url": "https://uploads.github.com/repos/owtf/owtf/releases/146842/assets{?name}",
+    "upload_url": "https://uploads.github.com/repos/owtf/owtf/releases/146842/assets{?name,label}",
     "html_url": "https://github.com/owtf/owtf/releases/tag/v0.45.0_Winter_Blizzard",
     "id": 146842,
     "tag_name": "v0.45.0_Winter_Blizzard",
@@ -113,11 +113,11 @@
   {
     "url": "https://api.github.com/repos/owtf/owtf/releases/40819",
     "assets_url": "https://api.github.com/repos/owtf/owtf/releases/40819/assets",
-    "upload_url": "https://uploads.github.com/repos/owtf/owtf/releases/40819/assets{?name}",
+    "upload_url": "https://uploads.github.com/repos/owtf/owtf/releases/40819/assets{?name,label}",
     "html_url": "https://github.com/owtf/owtf/releases/tag/v0.30_Summer_Storm_II",
     "id": 40819,
     "tag_name": "v0.30_Summer_Storm_II",
-    "target_commitish": "master",
+    "target_commitish": "develop",
     "name": "OWTF 0.30 Summer Storm II",
     "draft": false,
     "author": {

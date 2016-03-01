@@ -1,9 +1,0 @@
-{
-  "name": "owtf.github.io",
-  "description": "The [website](http://owtf.github.io) for [OWASP OWTF](https://github.com/owtf/owtf).",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/owtf/owtf.github.io.git"
-  },
-  "homepage": "owtf.github.io"
-}
