@@ -559,7 +559,7 @@ body {
   line-height: 1.6;
   font-weight: 400;
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #222; }
+}
 
 
 /* Typography
@@ -592,9 +592,12 @@ p {
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
-  color: #1EAEDB; }
+  color: #9feaf9;
+}
+
 a:hover {
-  color: #0FA0CE; }
+  color: #9feaf9;
+}
 
 
 /* Buttons
@@ -859,21 +862,25 @@ there.
 
 body {
   font-family: "Helvetica Neue", "Arial", sans-serif;
-  color: #45828E;
-  background-color: #A5ECFA;
+  background-color: #205159;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5 {
   font-weight: 400;
+  color: #9feaf9;
 }
 
 a {
- color: #39AEC6;
+ color: #9feaf9;
  text-decoration: none;
 }
 
+li {
+  color: #9feaf9 ;
+}
+
 a:hover {
-  color: #39AEC6;
+  color: #9feaf9;
   text-decoration: underline;
 }
 
@@ -883,7 +890,8 @@ a.no-hover-dec:hover {
 
 .inline-list {
   list-style: none;
-  padding: 0; margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .inline-list li {
@@ -900,16 +908,6 @@ pre, code {
   text-align: left;
 }
 
-pre code {
-  color: #C5F3FC;
-  border: none;
-  background-color: #076274;
-}
-
-code {
-  background-color: #EAE5DE;
-  border: none;
-}
 
 /* Sections
    ------------------------------------------ */
@@ -935,17 +933,17 @@ section {
 
 /* Header Nav */
 
-header {
+header{
   padding: 12px 0;
-  background-color: #76C7D7;
+  background-color: #f6f8f8;
 }
 
 header a {
-  color: #FAF7F3;
+  color: #20515b;
 }
 
 header a:hover {
-  color: #FAF7F3;
+  color: #20515b;
 }
 
 /* Hero */
@@ -958,25 +956,7 @@ header a:hover {
   font-size: 24px;
 }
 
-.electron-word {
-  background: url('../images/home.png') no-repeat;
-  background-size: 100% auto;
-  padding-bottom: 30%; /* Keeps aspect ratio. Original img ratio: 980x150. 150/980*100=15.3% */
-  margin-bottom: 40px;
-  width: 100%;
-  max-width: 800px;
-  display: inline-block;
-  font: 0/0 a;
-  color: transparent;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
 /* More Features */
-
-.more-features {
-  background-color: #7BDCEF;
-}
 
 .more-features .features {
   padding: 20px 0 0 0;
@@ -1011,6 +991,10 @@ header a:hover {
 
 .built-on {
   background-color: #FAF7F3;
+}
+
+#built-on-electron  h3{
+  color: #20515b;
 }
 
 .built-on li {
@@ -1048,11 +1032,11 @@ footer {
 
 .jump-to-release {
   text-align: center;
-  background: #A5ECFA;
+  background: #205159;
 }
 
 .releases {
-  background-color: #FAF7F3;
+  background-color: #205159;
 }
 
 .releases h3 em {
@@ -1066,11 +1050,34 @@ footer {
   content: '○ ';
 }
 
-.trello {
-  font-size:24px;
-  height: auto;
-  color:white;
-  text-align: center;
-  font-style: italic;
-  background-color: darkslategrey;
+code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  border: 0;
+  font-size: 16px;
+  background-color: #f6f8f8;
+}
+
+.minitron {
+  padding: 36px;
+  color: $hsl(230, 24%, 80%);
+  background-color: hsl(230, 24%, 36%);
+
+  a {
+    color: hsl(230, 24%, 100%);
+  }
+}
+
+.minitron-title {
+  margin: 0;
+  color: #9feaf9;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  -webkit-font-smoothing: subpixel-antialiased;
 }

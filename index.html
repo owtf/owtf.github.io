@@ -1,11 +1,15 @@
 ---
 layout: default
 ---
-
+  <div class="minitron text-center">
+    <div class="container">
+      <h3 class="minitron-title">OWTF 2.0a "Tikka Masala" is here! See the <a href="bhttp://blog.7-a.org/2016/05/owtf-20a-tikka-masala-released-plz-rt.html">release announcement</a> to get started.</h3>
+    </div>
+  </div>
   <div class='row hero'>
     <div class='container'>
       <div class='twelve columns'>
-        <a class='electron-word' href='/'>OWASP OWTF</a>
+      <h1>Offensive Web Testing Framework</h1>
         <h5>{{ site.description }}</h5>
       </div>
     </div>
@@ -28,7 +32,7 @@ layout: default
           <p>
                 <li>Instead of implementing yet another spider (a hard job), <b>OWTF</b> will scrub the output of all tools/plugins run to gather as many URLs as possible.</li>
                 <li>Scan by various aggression levels: <b>OWTF</b> supports scans which are based on the <i>aggressiveness</i> of the plugins/tools invoked.</li>
-                <li> <strong>Extensible</strong> <b>OWTF</b> manages tools through <i>'plugins'</i>making it trivial to add new tools. </li>
+                <li> <strong>Extensible</strong> <b>OWTF</b> manages tools through <i>'plugins'</i> making it trivial to add new tools. </li>
         </div>
         <div class='four columns'>
           <img src='../assets/images/os-box.png' width='150px'>
@@ -51,28 +55,23 @@ layout: default
       <div class='row features'>
         <div class='two columns offset-by-one'>
           <span class="mega-octicon octicon-squirrel"></span>
-          <br/>
-          fastest Python MiTM proxy yet!
+          <h5>Fastest Python MiTM proxy yet!</h5>
         </div>
         <div class='two columns'>
           <span class="mega-octicon octicon-bug"></span>
-          <br/>
-          Crash <br/>reporting directly to <a href="https://github.com/owtf/owtf/issues">Github issue tracker</a>
+          <h5>Crash <br/>reporting directly to <a href="https://github.com/owtf/owtf/issues">Github issue tracker</a></h5>
         </div>
         <div class='two columns'>
-          <span class="mega-octicon octicon-gift"></span></span>
-          <br/>
-          Comprehensive interactive report at end of each scan
+          <span class="mega-octicon octicon-gift"></span>
+          <h5>Comprehensive interactive report at end of each scan</h5>
         </div>
         <div class='two columns'>
           <span class="mega-octicon octicon-tools"></span>
-          <br/>
-          Easy plugin-based system; currently 100+ plugins!
+          <h5>Easy plugin-based system; currently 100+ plugins!</h5>
         </div>
         <div class='two columns'>
           <span class="mega-octicon octicon-device-desktop"></span>
-          <br/>
-          CLI and web interface
+          <h5>CLI and web interface</h5>
         </div>
       </div>
     </div>
@@ -108,16 +107,14 @@ layout: default
         </div>
         <div class='row'>
           <div class='twelve columns'>
-            <pre><code>
-              wget -N https://raw.githubusercontent.com/owtf/bootstrap-script/master/bootstrap.sh
-
-              bash bootstrap.sh
-            </code></pre>
+              <code>
+                <span class="cli">wget -N https://raw.githubusercontent.com/owtf/bootstrap-script/master/bootstrap.sh; bash bootstrap.sh</span>
+              </code>
 
             <h4 align="center"> or </h4>
-            <pre><code>
-            git clone -b &lt;branch&gt; http://www.github.com/owtf/owtf.git &lt;folder-name&gt;
-            </code></pre>
+            <code>
+            <span>git clone -b &lt;branch&gt; http://www.github.com/owtf/owtf.git &lt;folder-name&gt;</span>
+            </code>
           </div>
         </div>
         </div>
