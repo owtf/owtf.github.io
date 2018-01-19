@@ -1,7 +1,0 @@
-# Site settings
-title: OWASP OWTF
-description: '<b>OWASP OWTF</b> is a project that aims to make security assessments as efficient as possible by automating the manual, uncreative part of pen testing.<p>It provides out-of-box support for the <b>OWASP Testing Guide</b>, the <b>NIST</b> and the <b>PTES</b> standards.'
-url: "" # the base hostname & protocol for your sitetwitter_username: owtfp
-
-# Build settings
-markdown: kramdown
