@@ -1,0 +1,11 @@
+.hero {
+  background-color: #205159;
+  padding: 90px 0;
+  a, h1, h2, h3, h4, h5 {
+    font-weight: 400;
+    color: #9feaf9;
+  }
+  &-title {
+    font-weight: bold;
+  }
+}
