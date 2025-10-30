@@ -1,32 +1,38 @@
-# Gatsby React Boilerplate
+# OWTF Website
 
-### Requirements
+This repository contains the marketing website for the Offensive Web Testing Framework (OWTF). The site is powered by
+[Next.js](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/) and styled using [Tailwind CSS](https://tailwindcss.com/).
 
-*  [Node.js](http://nodejs.org): for all the magic
-*  [Gatsby](https://www.gatsbyjs.org/docs/)
+## Getting started
 
-### Features
+1. Install dependencies
+   ```bash
+   npm install
+   ```
+2. Start the development server
+   ```bash
+   npm run dev
+   ```
+3. Open [http://localhost:3000](http://localhost:3000) to preview the site.
 
-* Basic configuration and folder structure
-* Uses postcss and sass (with autoprefixer and pixrem)
-* Uses [Bootstrap 4](http://getbootstrap.com/) grid
-* Leaves the styling to you
-* Uses data from local json files
-* Contains Node.js server code for easy, secure, and fast hosting
-* [SVG sprites](https://css-tricks.com/svg-sprites-use-better-icon-fonts/): Add your icons in `components/icon` as .icon files and use them.
+## Available scripts
 
-### How to proceed
+| Command        | Description                |
+| -------------- | -------------------------- |
+| `npm run dev`  | Start the Next.js dev server |
+| `npm run build`| Create an optimized production build |
+| `npm run start`| Run the production build locally |
+| `npm run lint` | Lint the project using ESLint |
 
-1.  Prepare a coffee
-1.  Run: `npm i` to install the dependencies
-1.  Run: `npm run dev` to run Gatsby
-1.  You should see shortly some text that says `The development server is listening at: http://localhost:8000`. Open that address in your browser and…
-1.  Start coding!
+## Project structure
 
-### How to build
+```
+app/            # Next.js App Router pages and layout
+components/     # Reusable UI components
+public/         # Static assets
+```
 
-1.  Run: `npm run build` to build website into `/public` folder
+## Deployment
 
-### Considerations
-
-* **RTL**: The usual method of generating different css file for RTL pages (as seen in static-html-boilerplate) will not work out of the box here since Gatsby pulls all the css together, this means the RTL css will override the LTR one.
+The production build outputs to the `.next` directory. Use `npm run build` followed by `npm run start` or deploy via any platform that
+supports Next.js (e.g., Vercel, Netlify, or a custom Node.js server).
