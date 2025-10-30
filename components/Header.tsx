@@ -4,7 +4,7 @@ const links = [
   { label: "Overview", href: "#overview" },
   { label: "Capabilities", href: "#capabilities" },
   { label: "Standards", href: "#standards" },
-  { label: "Docs", href: "https://docs.owasp.org/projects/owtf/" }
+  { label: "Docs", href: "https://owtf.readthedocs.io/en/develop/" }
 ];
 
 const Header = () => {

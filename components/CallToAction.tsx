@@ -26,7 +26,7 @@ const CallToAction = () => {
             </p>
           </div>
           <a
-            href="https://docs.owasp.org/projects/owtf/"
+            href="https://owtf.readthedocs.io/en/develop/"
             className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900"
           >
             Browse documentation

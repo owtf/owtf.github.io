@@ -22,7 +22,7 @@ const Footer = () => {
           </nav>
         </div>
         <p className="mt-8 border-t border-slate-200 pt-6 text-xs text-slate-500">
-          © {new Date().getFullYear()} OWASP OWTF. Built by the community for testers everywhere.
+          © {new Date().getFullYear()} OWASP OWTF.
         </p>
       </div>
     </footer>

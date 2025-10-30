@@ -51,7 +51,7 @@ const Hero = () => {
             <div className="grid gap-4 sm:grid-cols-3">
               <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-inset">
                 <div className="text-2xl font-semibold text-slate-900">OWASP</div>
-                <p className="mt-1 text-sm text-slate-600">Community project</p>
+                <p className="mt-1 text-sm text-slate-600">Flagship project</p>
               </div>
               <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-inset">
                 <div className="text-2xl font-semibold text-slate-900">100+</div>
