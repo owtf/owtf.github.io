@@ -1,48 +1,44 @@
 const phases = [
   {
-    step: "01",
-    title: "Profile & scope",
+    title: "Support established testing standards",
     description:
-      "Choose from OWASP, NIST, PTES, or your own templates. Define targets, authentication, and notifications in a few clicks.",
-    items: ["Customisable assessment profiles", "Secrets-safe credential storage", "Stakeholder-ready briefs"]
+      "OWTF provides out-of-the-box support for the OWASP Testing Guide as well as the NIST and PTES standards, helping teams align with recognised methodologies.",
+    items: ["OWASP Testing Guide coverage", "NIST-aligned workflows", "PTES-ready profiles"]
   },
   {
-    step: "02",
-    title: "Run & adapt",
+    title: "Automate repeatable tasks",
     description:
-      "Execute curated plugins, drop into manual testing, and record evidence without leaving the flow. Automation stays transparent.",
-    items: ["Plugin orchestration", "Inline manual notes", "Live coverage insights"]
+      "Gather URLs by scrubbing plugin output, trigger scans by aggression level, and extend coverage by adding new tools through plugins.",
+    items: ["URL harvesting from tools", "Aggression-level based scans", "Extensible plugin system"]
   },
   {
-    step: "03",
-    title: "Report & share",
+    title: "Report findings with context",
     description:
-      "Publish executive summaries, sync with trackers, and deliver remediation guidance that keeps shipping on schedule.",
-    items: ["Beautiful PDF & HTML reports", "Jira / GitHub Issues sync", "Remediation workflow"]
+      "OWTF concludes each scan with a comprehensive interactive report so teams can explore evidence and prioritise remediation.",
+    items: ["Interactive reporting", "Evidence tracking", "Team-ready summaries"]
   }
 ];
 
 const WorkflowSection = () => {
   return (
-    <section id="workflow" className="section-container pb-24">
+    <section id="standards" className="section-container pb-24">
       <div className="flex flex-col gap-16">
         <div className="max-w-3xl space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-white/40">Workflow</p>
-          <h2 className="text-3xl font-semibold text-white sm:text-4xl">From reconnaissance to reporting without losing momentum.</h2>
-          <p className="text-base text-white/70">
-            OWTF keeps testers in control at every turn. Automate the boring parts, capture the nuanced findings, and package everything for the people who rely on you.
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-500">Standards & workflow</p>
+          <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">Keep methodology, automation, and reporting in sync.</h2>
+          <p className="text-base text-slate-600">
+            From methodology alignment to evidence delivery, OWTF keeps the flow of a web security assessment organised without sacrificing the analyst’s judgement.
           </p>
         </div>
         <div className="grid gap-8 lg:grid-cols-3">
           {phases.map((phase) => (
-            <article key={phase.title} className="relative rounded-3xl border border-white/10 bg-white/[0.03] p-8">
-              <span className="text-xs font-semibold uppercase tracking-[0.5em] text-white/40">{phase.step}</span>
-              <h3 className="mt-4 text-2xl font-semibold text-white">{phase.title}</h3>
-              <p className="mt-3 text-sm text-white/70">{phase.description}</p>
-              <ul className="mt-6 space-y-2 text-sm text-white/60">
+            <article key={phase.title} className="rounded-3xl border border-slate-200 bg-white p-8 shadow-card">
+              <h3 className="text-xl font-semibold text-slate-900">{phase.title}</h3>
+              <p className="mt-3 text-sm text-slate-600">{phase.description}</p>
+              <ul className="mt-6 space-y-2 text-sm text-slate-600">
                 {phase.items.map((item) => (
                   <li key={item} className="flex items-center gap-2">
-                    <span className="h-1 w-5 rounded-full bg-white/30" />
+                    <span className="h-1 w-5 rounded-full bg-slate-300" />
                     {item}
                   </li>
                 ))}

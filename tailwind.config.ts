@@ -5,18 +5,19 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+        sans: ["var(--font-inter)", "Inter", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
         mono: ["Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
       },
       colors: {
-        background: "#020617",
+        background: "#ffffff",
         accent: {
-          DEFAULT: "#00E0FF",
-          soft: "#B4F3FF"
+          DEFAULT: "#0B6FFF",
+          soft: "#E3EEFF"
         }
       },
       boxShadow: {
-        glow: "0 0 120px rgba(0, 224, 255, 0.35)"
+        card: "0 18px 60px rgba(15, 23, 42, 0.08)",
+        inset: "inset 0 0 0 1px rgba(15, 23, 42, 0.06)"
       }
     }
   },
