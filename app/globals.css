@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-background text-slate-900 font-sans antialiased;
+}
+
+a {
+  @apply text-slate-900 transition-colors hover:text-accent;
+}
+
+.section-container {
+  @apply mx-auto w-full max-w-6xl px-6 md:px-12 lg:px-20;
+}
