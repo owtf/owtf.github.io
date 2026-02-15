@@ -3,9 +3,9 @@ _site/
 .jekyll-cache/
 .jekyll-metadata
 _next/*
-!_next/.keep
 out/
 index.txt
+.nojekyll
 vendor/
 .bundle/
 .DS_Store
