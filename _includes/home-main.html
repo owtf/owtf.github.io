@@ -1,0 +1,137 @@
+<main class="space-y-32 pb-16"><section id="overview" class="relative overflow-hidden pb-32 pt-24"><div class="section-container"><div class="grid gap-16 lg:grid-cols-[minmax(0,1fr)_420px]">
+<div class="space-y-10">
+<div class="space-y-6">
+<h1 class="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">Offensive Web Testing Framework</h1>
+<p class="text-lg leading-relaxed text-slate-600">OWASP OWTF makes security assessments as efficient as possible by automating the manual, uncreative part of penetration testing while still supporting OWASP, NIST, and PTES methodologies out of the box.</p>
+</div>
+<div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+<a href="https://github.com/owtf/owtf/releases" class="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">Download OWTF<span class="text-lg leading-none">&#8599;</span></a><a href="https://docs.owasp.org/projects/owtf/" class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">Read the documentation</a>
+</div>
+<div class="grid gap-4 sm:grid-cols-3">
+<div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-inset">
+<div class="text-2xl font-semibold text-slate-900">OWASP</div>
+<p class="mt-1 text-sm text-slate-600">Flagship project</p>
+</div>
+<div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-inset">
+<div class="text-2xl font-semibold text-slate-900">100+</div>
+<p class="mt-1 text-sm text-slate-600">Plugins and integrations</p>
+</div>
+<div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-inset">
+<div class="text-2xl font-semibold text-slate-900">Interactive</div>
+<p class="mt-1 text-sm text-slate-600">Reporting after every scan</p>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-card">
+<div class="flex items-center justify-between text-xs font-medium uppercase tracking-[0.35em] text-slate-500">
+<span>Quick start</span><span>Terminal</span>
+</div>
+<pre class="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm leading-relaxed text-slate-900"><code class="block whitespace-pre-wrap break-words font-mono">pip install git+https://github.com/owtf/owtf#egg=owtf
+owtf --ui
+
+# Docker
+make docker-build &amp;&amp; make docker-run</code></pre>
+</div>
+<div class="grid gap-4">
+<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-inset">
+<h3 class="text-sm font-semibold text-slate-900">Responsive web interface</h3>
+<p class="mt-2 text-sm text-slate-600">Configure and monitor OWTF through the browser-based UI included with the project.</p>
+</div>
+<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-inset">
+<h3 class="text-sm font-semibold text-slate-900">Plugin-driven automation</h3>
+<p class="mt-2 text-sm text-slate-600">Extend OWTF by adding plugins that orchestrate your favourite assessment tools and workflows.</p>
+</div>
+<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-inset">
+<h3 class="text-sm font-semibold text-slate-900">Works across platforms</h3>
+<p class="mt-2 text-sm text-slate-600">Run OWTF anywhere Docker is available, including Windows and macOS environments.</p>
+</div>
+</div>
+</div>
+</div></div></section><section id="capabilities" class="section-container pb-24"><div class="flex flex-col gap-16">
+<div class="max-w-3xl space-y-4">
+<p class="text-xs font-semibold uppercase tracking-[0.4em] text-slate-500">Capabilities</p>
+<h2 class="text-3xl font-semibold text-slate-900 sm:text-4xl">Automation that respects human-driven testing.</h2>
+<p class="text-base text-slate-600">OWTF focuses on automating repetitive work while keeping analysts in control. The project is built around extensible plugins and tooling support maintained by the community.</p>
+</div>
+<div class="grid gap-8 lg:grid-cols-3">
+<article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-card"><h3 class="text-2xl font-semibold text-slate-900">Easy to use</h3>
+<p class="mt-3 text-sm text-slate-600">Use the built-in web UI to configure and monitor assessments, and access RESTful APIs for all core capabilities.</p>
+<ul class="mt-6 space-y-2 text-sm text-slate-600">
+<li class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-accent"></span>Responsive management interface</li>
+<li class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-accent"></span>REST APIs for automation</li>
+</ul></article><article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-card"><h3 class="text-2xl font-semibold text-slate-900">Unites popular tools</h3>
+<p class="mt-3 text-sm text-slate-600">OWTF scrubs plugin output to gather as many URLs as possible and lets you scan by aggression level across your toolkit.</p>
+<ul class="mt-6 space-y-2 text-sm text-slate-600">
+<li class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-accent"></span>Plugin-based orchestration</li>
+<li class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-accent"></span>Multiple aggression levels</li>
+</ul></article><article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-card"><h3 class="text-2xl font-semibold text-slate-900">Use OWTF anywhere</h3>
+<p class="mt-3 text-sm text-slate-600">Run the official Docker image on any platform Docker supports so teams can work from Windows, macOS, or Linux.</p>
+<ul class="mt-6 space-y-2 text-sm text-slate-600">
+<li class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-accent"></span>Docker support</li>
+<li class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-accent"></span>Cross-platform workflow</li>
+</ul></article>
+</div>
+</div></section><section id="standards" class="section-container pb-24"><div class="flex flex-col gap-16">
+<div class="max-w-3xl space-y-4">
+<p class="text-xs font-semibold uppercase tracking-[0.4em] text-slate-500">Standards &amp; workflow</p>
+<h2 class="text-3xl font-semibold text-slate-900 sm:text-4xl">Keep methodology, automation, and reporting in sync.</h2>
+<p class="text-base text-slate-600">From methodology alignment to evidence delivery, OWTF keeps the flow of a web security assessment organised without sacrificing the analyst&rsquo;s judgement.</p>
+</div>
+<div class="grid gap-8 lg:grid-cols-3">
+<article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-card"><h3 class="text-xl font-semibold text-slate-900">Support established testing standards</h3>
+<p class="mt-3 text-sm text-slate-600">OWTF provides out-of-the-box support for the OWASP Testing Guide as well as the NIST and PTES standards, helping teams align with recognised methodologies.</p>
+<ul class="mt-6 space-y-2 text-sm text-slate-600">
+<li class="flex items-center gap-2">
+<span class="h-1 w-5 rounded-full bg-slate-300"></span>OWASP Testing Guide coverage</li>
+<li class="flex items-center gap-2">
+<span class="h-1 w-5 rounded-full bg-slate-300"></span>NIST-aligned workflows</li>
+<li class="flex items-center gap-2">
+<span class="h-1 w-5 rounded-full bg-slate-300"></span>PTES-ready profiles</li>
+</ul></article><article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-card"><h3 class="text-xl font-semibold text-slate-900">Automate repeatable tasks</h3>
+<p class="mt-3 text-sm text-slate-600">Gather URLs by scrubbing plugin output, trigger scans by aggression level, and extend coverage by adding new tools through plugins.</p>
+<ul class="mt-6 space-y-2 text-sm text-slate-600">
+<li class="flex items-center gap-2">
+<span class="h-1 w-5 rounded-full bg-slate-300"></span>URL harvesting from tools</li>
+<li class="flex items-center gap-2">
+<span class="h-1 w-5 rounded-full bg-slate-300"></span>Aggression-level based scans</li>
+<li class="flex items-center gap-2">
+<span class="h-1 w-5 rounded-full bg-slate-300"></span>Extensible plugin system</li>
+</ul></article><article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-card"><h3 class="text-xl font-semibold text-slate-900">Report findings with context</h3>
+<p class="mt-3 text-sm text-slate-600">OWTF concludes each scan with a comprehensive interactive report so teams can explore evidence and prioritise remediation.</p>
+<ul class="mt-6 space-y-2 text-sm text-slate-600">
+<li class="flex items-center gap-2">
+<span class="h-1 w-5 rounded-full bg-slate-300"></span>Interactive reporting</li>
+<li class="flex items-center gap-2">
+<span class="h-1 w-5 rounded-full bg-slate-300"></span>Evidence tracking</li>
+<li class="flex items-center gap-2">
+<span class="h-1 w-5 rounded-full bg-slate-300"></span>Team-ready summaries</li>
+</ul></article>
+</div>
+</div></section><section id="get-started" class="section-container pb-32"><div class="rounded-[2.5rem] border border-slate-200 bg-white px-8 py-12 shadow-card">
+<div class="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
+<div class="max-w-xl space-y-4">
+<p class="text-xs font-semibold uppercase tracking-[0.4em] text-slate-500">Get started</p>
+<h2 class="text-3xl font-semibold text-slate-900">Run OWTF today.</h2>
+<p class="text-base text-slate-600">These commands mirror the official quick-start guidance so you can install OWTF from source, use the Docker tooling, and open the web UI without extra setup.</p>
+</div>
+<a href="https://owtf.readthedocs.io/en/develop/" class="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">Browse documentation<span class="text-lg leading-none">&rarr;</span></a>
+</div>
+<div class="mt-12 grid gap-4 md:grid-cols-3">
+<div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-sm">
+<code class="block whitespace-pre-wrap break-words font-mono text-slate-900">pip install git+https://github.com/owtf/owtf#egg=owtf</code><p class="mt-3 text-slate-600">Install the latest code straight from the official repository.</p>
+</div>
+<div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-sm">
+<code class="block whitespace-pre-wrap break-words font-mono text-slate-900">make docker-build &amp;&amp; make docker-run</code><p class="mt-3 text-slate-600">Build and launch the Docker environment provided by the project.</p>
+</div>
+<div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-sm">
+<code class="block whitespace-pre-wrap break-words font-mono text-slate-900">owtf --ui</code><p class="mt-3 text-slate-600">Access the web interface on http://localhost:8009 for live control.</p>
+</div>
+</div>
+</div></section></main>
