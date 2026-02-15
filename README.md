@@ -38,3 +38,7 @@ See `/docs/PASSIVE_SCANNER_SOURCE.md` for the integration contract.
 The scanner is vendored at `/online-passive-scanner/` and is accessible at:
 
 - `/online-passive-scanner/`
+
+A Jekyll-native launcher page is available at:
+
+- `/passive-scanner/`
