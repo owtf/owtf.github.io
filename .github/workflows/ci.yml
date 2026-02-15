@@ -45,6 +45,13 @@ jobs:
 
           pattern = re.compile(r'(?:href|src)=["\']([^"\']+)["\']')
           missing_targets = []
+          ignore_exact = {
+              'link',
+              'link_to_plugin',
+          }
+          ignore_regex = [
+              re.compile(r'^http__.+\.html$'),
+          ]
 
           for html_file in html_files:
               text = html_file.read_text(encoding='utf-8')
@@ -65,10 +72,17 @@ jobs:
                   if not normalized:
                       continue
 
-                  if normalized.startswith('/'):
-                      normalized = normalized[1:]
+                  if normalized in ignore_exact:
+                      continue
 
-                  candidate = root / normalized
+                  if any(regex.match(normalized) for regex in ignore_regex):
+                      continue
+
+                  if normalized.startswith('/'):
+                      candidate = root / normalized[1:]
+                  else:
+                      candidate = html_file.parent / normalized
+
                   if not candidate.exists():
                       missing_targets.append((str(html_file), target))
 
