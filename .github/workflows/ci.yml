@@ -35,6 +35,7 @@ jobs:
           html_files = [
               root / 'index.html',
               root / '404.html',
+              root / 'passive-scanner' / 'index.html',
               root / 'online-passive-scanner' / 'index.html',
               root / 'online-passive-scanner' / 'report.html',
           ]

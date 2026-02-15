@@ -44,6 +44,7 @@ jobs:
           html_files = [
               Path('index.html'),
               Path('404.html'),
+              Path('passive-scanner/index.html'),
               Path('online-passive-scanner/index.html'),
               Path('online-passive-scanner/report.html'),
           ]
