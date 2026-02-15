@@ -1,0 +1,11 @@
+title: "OWTF - Offensive Web Testing Framework"
+description: "OWTF automates the uncreative part of web security testing so assessors can focus on insight, supporting OWASP, NIST, and PTES methodologies."
+url: "https://owtf.github.io"
+baseurl: ""
+markdown: kramdown
+plugins:
+  - jekyll-seo-tag
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" class="__variable_f367f3">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}" />
+    <meta name="next-size-adjust" />
+    {% if page.noindex %}
+    <meta name="robots" content="noindex" />
+    {% endif %}
+    <link
+      rel="preload"
+      href="{{ '/assets/fonts/e4af272ccee01ff0-s.p.woff2' | relative_url }}"
+      as="font"
+      crossorigin
+      type="font/woff2"
+    />
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}" />
+  </head>
+  <body class="relative min-h-screen bg-background text-slate-900">
+    {{ content }}
+  </body>
+</html>

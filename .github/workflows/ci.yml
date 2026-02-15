@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - codex/**
+
+jobs:
+  jekyll-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Build site
+        run: bundle exec jekyll build
+
+      - name: Validate local links in generated HTML
+        run: |
+          python3 - <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+
+          root = Path('_site')
+          html_files = [
+              root / 'index.html',
+              root / '404.html',
+              root / 'online-passive-scanner' / 'index.html',
+              root / 'online-passive-scanner' / 'report.html',
+          ]
+          missing_html = [str(p) for p in html_files if not p.exists()]
+          if missing_html:
+              print('Missing generated HTML:', ', '.join(missing_html))
+              sys.exit(1)
+
+          pattern = re.compile(r'(?:href|src)=["\']([^"\']+)["\']')
+          missing_targets = []
+
+          for html_file in html_files:
+              text = html_file.read_text(encoding='utf-8')
+              for target in pattern.findall(text):
+                  if target.startswith((
+                      'http://',
+                      'https://',
+                      'mailto:',
+                      'tel:',
+                      'javascript:',
+                      'data:',
+                      '#',
+                      '//',
+                  )):
+                      continue
+
+                  normalized = target.split('#', 1)[0].split('?', 1)[0]
+                  if not normalized:
+                      continue
+
+                  if normalized.startswith('/'):
+                      normalized = normalized[1:]
+
+                  candidate = root / normalized
+                  if not candidate.exists():
+                      missing_targets.append((str(html_file), target))
+
+          if missing_targets:
+              print('Missing local targets referenced in generated HTML:')
+              for source, target in missing_targets[:100]:
+                  print(f'  {source} -> {target}')
+              if len(missing_targets) > 100:
+                  print(f'  ... and {len(missing_targets) - 100} more')
+              sys.exit(1)
+
+          print('Generated HTML link validation passed.')
+          PY

@@ -1,0 +1,10 @@
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+_next/
+out/
+index.txt
+vendor/
+.bundle/
+.DS_Store

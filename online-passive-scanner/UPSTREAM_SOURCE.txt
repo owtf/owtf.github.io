@@ -1,0 +1,4 @@
+source_repo=https://github.com/owtf/online-passive-scanner
+source_commit=3fd950682bdbf893e87d4242e547bb4f45fc9216
+source_date=2025-10-30
+source_subject=Merge pull request #4 from owtf/codex/update-and-fix-website-dependencies
