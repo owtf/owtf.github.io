@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  static-integrity:
+    name: Static Integrity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate published files and internal links
+        run: |
+          python3 - <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+
+          root = Path('.')
+          required_paths = [
+              Path('.nojekyll'),
+              Path('index.html'),
+              Path('404.html'),
+              Path('_next'),
+          ]
+
+          missing = [str(path) for path in required_paths if not path.exists()]
+          if missing:
+              print('Missing required published files:', ', '.join(missing))
+              sys.exit(1)
+
+          html_files = [Path('index.html'), Path('404.html')]
+          pattern = re.compile(r'(?:href|src)=["\']([^"\']+)["\']')
+
+          missing_targets = []
+          for html_file in html_files:
+              text = html_file.read_text(encoding='utf-8')
+              for target in pattern.findall(text):
+                  if target.startswith((
+                      'http://',
+                      'https://',
+                      'mailto:',
+                      'tel:',
+                      'javascript:',
+                      'data:',
+                      '#',
+                      '//',
+                  )):
+                      continue
+
+                  normalized = target.split('#', 1)[0].split('?', 1)[0]
+                  if not normalized:
+                      continue
+
+                  if normalized.startswith('/'):
+                      normalized = normalized[1:]
+
+                  candidate = root / normalized
+                  if not candidate.exists():
+                      missing_targets.append((str(html_file), target))
+
+          if missing_targets:
+              print('Missing local targets referenced in HTML:')
+              for source, target in missing_targets[:50]:
+                  print(f'  {source} -> {target}')
+              if len(missing_targets) > 50:
+                  print(f'  ... and {len(missing_targets) - 50} more')
+              sys.exit(1)
+
+          print('Static site integrity checks passed.')
+          PY
