@@ -9,3 +9,13 @@ exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
+  - node_modules
+  - vendor
+  - vendor/bundle
+  - vendor/cache
+  - vendor/gems
+  - vendor/ruby
+  - .bundle
+  - .sass-cache
+  - .jekyll-cache
+  - .jekyll-metadata
