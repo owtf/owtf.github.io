@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "OWTF Passive Scanner"
-description: "Run the OWTF online passive scanner from a Jekyll-native page."
+description: "Compatibility route for OWTF passive scanner."
 ---
 <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[420px] bg-gradient-to-b from-slate-100 via-white to-white"></div>
 <div class="relative flex min-h-screen flex-col">
@@ -10,18 +10,9 @@ description: "Run the OWTF online passive scanner from a Jekyll-native page."
     <section class="section-container pb-24 pt-24">
       <div class="max-w-3xl space-y-6">
         <p class="text-xs font-semibold uppercase tracking-[0.4em] text-slate-500">Passive scanner</p>
-        <h1 class="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Scan a target URL</h1>
-        <p class="text-lg leading-relaxed text-slate-600">Passive scanning reviews publicly exposed signals such as headers, metadata, and client-side behavior to surface likely security misconfigurations without active exploitation.</p>
-      </div>
-
-      <div class="mt-12 rounded-3xl border border-slate-200 bg-white p-8 shadow-card">
-        <label for="target-url" class="text-sm font-semibold text-slate-900">Target URL</label>
-        <input id="target-url" type="url" placeholder="https://www.example.com" class="mt-3 block rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-900" style="width:100%" />
-        <p id="scanner-error" class="mt-2 text-sm text-slate-600" style="display:none"></p>
-        <div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
-          <button id="run-passive-scan" class="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">Open passive report<span class="text-lg leading-none">&rarr;</span></button>
-          <a href="/online-passive-scanner/" class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">Open legacy scanner UI</a>
-        </div>
+        <h1 class="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Moved to the online scanner route</h1>
+        <p class="text-lg leading-relaxed text-slate-600">This path is kept for compatibility. You are being redirected to the rebuilt scanner at `/online-passive-scanner/`.</p>
+        <a href="/online-passive-scanner/" class="inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">Open scanner<span class="text-lg leading-none">&rarr;</span></a>
       </div>
     </section>
   </main>
@@ -29,37 +20,6 @@ description: "Run the OWTF online passive scanner from a Jekyll-native page."
 </div>
 <script>
   (function () {
-    var button = document.getElementById('run-passive-scan');
-    var input = document.getElementById('target-url');
-    var error = document.getElementById('scanner-error');
-
-    function showError(message) {
-      error.textContent = message;
-      error.style.display = 'block';
-    }
-
-    function clearError() {
-      error.textContent = '';
-      error.style.display = 'none';
-    }
-
-    button.addEventListener('click', function () {
-      clearError();
-      var value = (input.value || '').trim();
-      if (!value) {
-        showError('Please enter a URL to continue.');
-        input.focus();
-        return;
-      }
-
-      try {
-        var parsed = new URL(value);
-        var destination = '/passive-scanner/report/#q=' + encodeURIComponent(parsed.href);
-        window.location.assign(destination);
-      } catch (err) {
-        showError('The value provided is not a valid URL.');
-        input.focus();
-      }
-    });
+    window.location.replace('/online-passive-scanner/');
   })();
 </script>

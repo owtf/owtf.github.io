@@ -27,19 +27,16 @@ The generated output is written to `_site/` and should not be committed.
 
 The initial Jekyll migration preserves existing OWTF landing page content and formatting. Modernization changes should be made incrementally after parity sign-off.
 
-## Passive scanner source
+## Passive scanner routes
 
-Passive scanner integration in this repository is pinned to upstream `owtf/online-passive-scanner`:
-
-- https://github.com/owtf/online-passive-scanner
-
-See `/docs/PASSIVE_SCANNER_SOURCE.md` for the integration contract.
-
-The scanner is vendored at `/online-passive-scanner/` and is accessible at:
+The online passive scanner is now implemented as a Jekyll-processed Tailwind + vanilla JS experience in this repository:
 
 - `/online-passive-scanner/`
+- `/online-passive-scanner/report.html`
 
-A Jekyll-native launcher page is available at:
+Compatibility routes are kept for older links and redirect to the online scanner routes:
 
-- `/passive-scanner/`
-- `/passive-scanner/report/`
+- `/passive-scanner/` -> `/online-passive-scanner/`
+- `/passive-scanner/report/` -> `/online-passive-scanner/report.html`
+
+See `/docs/PASSIVE_SCANNER_SOURCE.md` for implementation details and maintenance scope.

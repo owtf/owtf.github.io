@@ -48,11 +48,8 @@ jobs:
               Path('passive-scanner/report/index.html'),
               Path('online-passive-scanner/index.html'),
               Path('online-passive-scanner/report.html'),
-              Path('online-passive-scanner/report-legacy.html'),
           ]
           pattern = re.compile(r'(?:href|src)=["\']([^"\']+)["\']')
-          ignore_exact = {'link', 'link_to_plugin'}
-          ignore_regex = [re.compile(r'^http__.+\.html$')]
 
           missing_targets = []
           for html_file in html_files:
@@ -72,12 +69,6 @@ jobs:
 
                   normalized = target.split('#', 1)[0].split('?', 1)[0]
                   if not normalized:
-                      continue
-
-                  if normalized in ignore_exact:
-                      continue
-
-                  if any(regex.match(normalized) for regex in ignore_regex):
                       continue
 
                   if normalized.startswith('/'):
