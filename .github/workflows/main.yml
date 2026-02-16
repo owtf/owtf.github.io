@@ -45,8 +45,10 @@ jobs:
               Path('index.html'),
               Path('404.html'),
               Path('passive-scanner/index.html'),
+              Path('passive-scanner/report/index.html'),
               Path('online-passive-scanner/index.html'),
               Path('online-passive-scanner/report.html'),
+              Path('online-passive-scanner/report-legacy.html'),
           ]
           pattern = re.compile(r'(?:href|src)=["\']([^"\']+)["\']')
           ignore_exact = {'link', 'link_to_plugin'}
