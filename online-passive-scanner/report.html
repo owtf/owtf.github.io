@@ -1,27 +1,405 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Redirecting to passive scanner report...</title>
-  <meta http-equiv="refresh" content="0; url=/passive-scanner/report/" />
-  <script>
-    (function () {
-      var destination = '/passive-scanner/report/' + (window.location.hash || '');
-      window.location.replace(destination);
-    })();
-  </script>
-</head>
-<body>
-  <p>Redirecting to the modern passive scanner report view...</p>
-  <p><a id="fallback-link" href="/passive-scanner/report/">Continue</a></p>
-  <script>
-    (function () {
-      var link = document.getElementById('fallback-link');
-      if (window.location.hash) {
-        link.href = '/passive-scanner/report/' + window.location.hash;
+---
+layout: default
+title: "OWTF Passive Scanner Report"
+description: "Passive URL and DNS findings for externally visible risk indicators."
+---
+<style>
+  .severity-high { border-left: 4px solid #dc2626; }
+  .severity-medium { border-left: 4px solid #ea580c; }
+  .severity-low { border-left: 4px solid #ca8a04; }
+  .severity-info { border-left: 4px solid #2563eb; }
+  .badge {
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.2rem 0.55rem;
+    text-transform: uppercase;
+  }
+  .badge-high { background: #fee2e2; color: #991b1b; }
+  .badge-medium { background: #ffedd5; color: #9a3412; }
+  .badge-low { background: #fef9c3; color: #854d0e; }
+  .badge-info { background: #dbeafe; color: #1e40af; }
+  .score-high { background: #fee2e2; color: #991b1b; }
+  .score-medium { background: #ffedd5; color: #9a3412; }
+  .score-low { background: #dcfce7; color: #166534; }
+</style>
+
+<div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[420px] bg-gradient-to-b from-slate-100 via-white to-white"></div>
+<div class="relative flex min-h-screen flex-col">
+  {% include header.html %}
+  <main class="space-y-32 pb-16">
+    <section class="section-container pb-24 pt-24">
+      <div class="max-w-3xl space-y-6">
+        <p class="text-xs font-semibold uppercase tracking-[0.4em] text-slate-500">Passive scanner report</p>
+        <h1 class="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Externally visible risk signals</h1>
+        <p class="text-lg leading-relaxed text-slate-600">Use this report to quickly triage URL and DNS exposure patterns before deeper active assessment with OWTF modules.</p>
+      </div>
+
+      <div class="mt-12 rounded-3xl border border-slate-200 bg-white p-8 shadow-card">
+        <label for="target-url" class="text-sm font-semibold text-slate-900">Target URL</label>
+        <input id="target-url" type="url" placeholder="https://www.example.com" class="mt-3 block rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-900" style="width:100%" autocomplete="url" />
+        <p id="scan-error" class="mt-2 text-sm text-slate-600" style="display:none"></p>
+        <div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <button id="run-scan" class="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">Run passive scan<span class="text-lg leading-none">&rarr;</span></button>
+          <button id="copy-link" class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">Copy report URL</button>
+        </div>
+      </div>
+
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-inset">
+          <p class="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">Risk score</p>
+          <p id="risk-score" class="mt-2 text-3xl font-semibold text-slate-900">0</p>
+          <p id="risk-label" class="mt-2 w-fit rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wide score-low">Low</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-inset">
+          <p class="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">Findings</p>
+          <p id="finding-count" class="mt-2 text-3xl font-semibold text-slate-900">0</p>
+          <p class="mt-2 text-sm text-slate-600">Detected passive indicators</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-inset">
+          <p class="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">DNS records</p>
+          <p id="dns-record-count" class="mt-2 text-3xl font-semibold text-slate-900">0</p>
+          <p class="mt-2 text-sm text-slate-600">A, AAAA, CAA, MX, NS, TXT answers</p>
+        </div>
+      </div>
+
+      <div class="mt-8 rounded-3xl border border-slate-200 bg-white p-8 shadow-card">
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl font-semibold text-slate-900">Findings</h2>
+          <span id="scan-status" class="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">Idle</span>
+        </div>
+        <div id="finding-list" class="mt-6 space-y-4"></div>
+      </div>
+
+      <div class="mt-8 rounded-3xl border border-slate-200 bg-white p-8 shadow-card">
+        <h2 class="text-xl font-semibold text-slate-900">DNS Detail</h2>
+        <div id="dns-detail" class="mt-4 space-y-2 text-sm text-slate-600"></div>
+      </div>
+
+      <div class="mt-8 rounded-3xl border border-slate-200 bg-white p-8 shadow-card">
+        <h2 class="text-xl font-semibold text-slate-900">Scan Metadata</h2>
+        <div class="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600">
+          <p><span class="font-semibold text-slate-900">Target:</span> <span id="meta-target" class="font-mono"></span></p>
+          <p class="mt-2"><span class="font-semibold text-slate-900">Scanned at:</span> <span id="meta-time"></span></p>
+          <p class="mt-2"><span class="font-semibold text-slate-900">Mode:</span> Passive URL and DNS checks only. No exploitation payloads are executed.</p>
+          <p class="mt-2"><span class="font-semibold text-slate-900">Resolver:</span> Google DNS-over-HTTPS (`https://dns.google/resolve`).</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  {% include footer.html %}
+</div>
+
+<script>
+  (function () {
+    var scoreWeights = { high: 34, medium: 16, low: 6, info: 1 };
+    var severityRank = { high: 3, medium: 2, low: 1, info: 0 };
+    var targetInput = document.getElementById('target-url');
+    var errorEl = document.getElementById('scan-error');
+    var statusEl = document.getElementById('scan-status');
+    var riskScoreEl = document.getElementById('risk-score');
+    var riskLabelEl = document.getElementById('risk-label');
+    var findingCountEl = document.getElementById('finding-count');
+    var dnsCountEl = document.getElementById('dns-record-count');
+    var findingListEl = document.getElementById('finding-list');
+    var dnsDetailEl = document.getElementById('dns-detail');
+    var metaTargetEl = document.getElementById('meta-target');
+    var metaTimeEl = document.getElementById('meta-time');
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function setError(message) {
+      if (!message) {
+        errorEl.style.display = 'none';
+        errorEl.textContent = '';
+        return;
       }
-    })();
-  </script>
-</body>
-</html>
+      errorEl.style.display = 'block';
+      errorEl.textContent = message;
+    }
+
+    function setStatus(value) {
+      statusEl.textContent = value;
+    }
+
+    function badgeClass(severity) {
+      if (severity === 'high') return 'badge badge-high';
+      if (severity === 'medium') return 'badge badge-medium';
+      if (severity === 'low') return 'badge badge-low';
+      return 'badge badge-info';
+    }
+
+    function riskLabel(score) {
+      if (score >= 70) return { text: 'High', className: 'mt-2 w-fit rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wide score-high' };
+      if (score >= 35) return { text: 'Medium', className: 'mt-2 w-fit rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wide score-medium' };
+      return { text: 'Low', className: 'mt-2 w-fit rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wide score-low' };
+    }
+
+    function currentHashTarget() {
+      var hash = window.location.hash || '';
+      var match = hash.match(/(?:^#|&)q=([^&]+)/);
+      if (!match) return '';
+      try {
+        return decodeURIComponent(match[1]);
+      } catch (err) {
+        return '';
+      }
+    }
+
+    function updateHashTarget(url) {
+      window.location.hash = 'q=' + encodeURIComponent(url);
+    }
+
+    async function dnsLookup(hostname, type) {
+      var endpoint = 'https://dns.google/resolve?name=' + encodeURIComponent(hostname) + '&type=' + type;
+      try {
+        var response = await fetch(endpoint, { method: 'GET' });
+        if (!response.ok) return null;
+        return await response.json();
+      } catch (err) {
+        return null;
+      }
+    }
+
+    function answerCount(payload) {
+      return payload && Array.isArray(payload.Answer) ? payload.Answer.length : 0;
+    }
+
+    function appendFinding(list, severity, title, evidence, recommendation) {
+      list.push({
+        severity: severity,
+        title: title,
+        evidence: evidence,
+        recommendation: recommendation
+      });
+    }
+
+    function renderFindings(findings) {
+      if (!findings.length) {
+        findingListEl.innerHTML = '<div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-sm text-slate-600">No passive findings were produced for this target.</div>';
+        return;
+      }
+
+      findings.sort(function (left, right) {
+        return severityRank[right.severity] - severityRank[left.severity];
+      });
+
+      var html = '';
+      for (var i = 0; i < findings.length; i += 1) {
+        var finding = findings[i];
+        html += '<article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-inset severity-' + escapeHtml(finding.severity) + '">';
+        html += '<div class="flex items-center justify-between gap-3"><h3 class="text-sm font-semibold text-slate-900">' + escapeHtml(finding.title) + '</h3><span class="' + badgeClass(finding.severity) + '">' + escapeHtml(finding.severity) + '</span></div>';
+        html += '<p class="mt-3 text-sm text-slate-600"><span class="font-semibold text-slate-900">Evidence:</span> ' + escapeHtml(finding.evidence) + '</p>';
+        html += '<p class="mt-2 text-sm text-slate-600"><span class="font-semibold text-slate-900">Recommendation:</span> ' + escapeHtml(finding.recommendation) + '</p>';
+        html += '</article>';
+      }
+      findingListEl.innerHTML = html;
+    }
+
+    function renderDns(records) {
+      var lines = [];
+      var types = ['A', 'AAAA', 'CAA', 'MX', 'NS', 'TXT'];
+      for (var i = 0; i < types.length; i += 1) {
+        var type = types[i];
+        var payload = records[type];
+        var count = answerCount(payload);
+        var values = count
+          ? payload.Answer.map(function (item) { return item.data || '(empty)'; }).join(', ')
+          : 'No answers';
+        lines.push('<p><span class="font-semibold text-slate-900">' + type + ':</span> ' + escapeHtml(values) + '</p>');
+      }
+      dnsDetailEl.innerHTML = lines.join('');
+    }
+
+    function computeRiskScore(findings) {
+      var score = 0;
+      for (var i = 0; i < findings.length; i += 1) {
+        score += scoreWeights[findings[i].severity] || 0;
+      }
+      return Math.min(score, 100);
+    }
+
+    async function runScan(targetValue) {
+      setError('');
+      setStatus('Running');
+
+      var parsed;
+      try {
+        parsed = new URL(targetValue);
+      } catch (err) {
+        setError('The value provided is not a valid URL.');
+        setStatus('Invalid target');
+        return;
+      }
+
+      var findings = [];
+      var url = parsed.href;
+      var host = parsed.hostname;
+      var queryKeys = Array.from(parsed.searchParams.keys());
+      var sensitiveKeyPattern = /(token|secret|apikey|api_key|password|passwd|jwt|session|auth|key)/i;
+
+      appendFinding(findings, 'info', 'Passive scan started', 'Target URL parsed successfully.', 'Review findings and validate priority issues in your active testing plan.');
+
+      if (parsed.protocol !== 'https:') {
+        appendFinding(findings, 'high', 'Target is not using HTTPS', 'Protocol detected: ' + parsed.protocol, 'Enforce HTTPS and redirect all HTTP traffic.');
+      }
+
+      if (parsed.username || parsed.password) {
+        appendFinding(findings, 'high', 'Credentials included in URL', 'URL username/password fields are present.', 'Remove credentials from URLs and use secure authentication flows.');
+      }
+
+      if (queryKeys.length > 12) {
+        appendFinding(findings, 'medium', 'High query parameter count', 'Detected ' + queryKeys.length + ' query parameters.', 'Reduce URL parameter sprawl and avoid exposing unnecessary state in URLs.');
+      }
+
+      if (queryKeys.some(function (key) { return sensitiveKeyPattern.test(key); })) {
+        appendFinding(findings, 'high', 'Sensitive query parameter names found', 'Parameters match secret/token patterns.', 'Move sensitive values from query strings to secure headers or request bodies.');
+      }
+
+      if (parsed.hash && sensitiveKeyPattern.test(parsed.hash)) {
+        appendFinding(findings, 'medium', 'Potential sensitive value in URL fragment', 'Hash fragment contains sensitive keywords.', 'Avoid placing tokens or secrets in URL fragments.');
+      }
+
+      if (/(\.bak|\.old|\.zip|\.tar|\.env|\.sql)$/i.test(parsed.pathname)) {
+        appendFinding(findings, 'high', 'Potential backup or sensitive file path', 'Path indicates potentially sensitive file extension.', 'Restrict direct access to backups/config exports and sanitize artifact publishing.');
+      }
+
+      if (/(\/admin|\/debug|\/internal|\/backup|\/test)/i.test(parsed.pathname)) {
+        appendFinding(findings, 'medium', 'Potentially sensitive route naming', 'Path includes admin/debug/internal style keywords.', 'Confirm route access controls and monitoring are correctly enforced.');
+      }
+
+      if (/^(\d{1,3}\.){3}\d{1,3}$/.test(host)) {
+        appendFinding(findings, 'medium', 'Target uses direct IPv4 address', 'Hostname appears to be an IPv4 literal.', 'Prefer managed DNS hostnames for stronger certificate and policy controls.');
+      }
+
+      if (host.indexOf('xn--') !== -1) {
+        appendFinding(findings, 'medium', 'Punycode domain detected', 'Hostname contains `xn--` label.', 'Review for homograph abuse risk and monitor lookalike domains.');
+      }
+
+      if (parsed.port && !((parsed.protocol === 'https:' && parsed.port === '443') || (parsed.protocol === 'http:' && parsed.port === '80'))) {
+        appendFinding(findings, 'medium', 'Non-standard service port', 'Detected explicit port ' + parsed.port + '.', 'Confirm this exposure is intentional and covered by controls.');
+      }
+
+      if (url.length > 1800) {
+        appendFinding(findings, 'low', 'Long URL length', 'URL length is ' + url.length + ' characters.', 'Validate upstream proxy and logging behavior for long request URLs.');
+      }
+
+      var dnsRecords = {
+        A: await dnsLookup(host, 'A'),
+        AAAA: await dnsLookup(host, 'AAAA'),
+        CAA: await dnsLookup(host, '257'),
+        MX: await dnsLookup(host, 'MX'),
+        NS: await dnsLookup(host, 'NS'),
+        TXT: await dnsLookup(host, 'TXT')
+      };
+
+      var totalDnsAnswers =
+        answerCount(dnsRecords.A) +
+        answerCount(dnsRecords.AAAA) +
+        answerCount(dnsRecords.CAA) +
+        answerCount(dnsRecords.MX) +
+        answerCount(dnsRecords.NS) +
+        answerCount(dnsRecords.TXT);
+
+      if (answerCount(dnsRecords.A) + answerCount(dnsRecords.AAAA) === 0) {
+        appendFinding(findings, 'medium', 'No A/AAAA answers returned', 'DNS-over-HTTPS did not return address records.', 'Validate DNS zone data and authoritative availability.');
+      } else {
+        appendFinding(findings, 'info', 'Address records discovered', 'A/AAAA answers were returned by resolver.', 'Track DNS updates and protect zone management access.');
+      }
+
+      if (answerCount(dnsRecords.CAA) === 0) {
+        appendFinding(findings, 'low', 'CAA policy not detected', 'No CAA records were returned.', 'Consider defining CAA records to limit certificate issuance authorities.');
+      }
+
+      if (answerCount(dnsRecords.MX) === 0) {
+        appendFinding(findings, 'info', 'No MX records detected', 'No inbound mail exchange records returned.', 'If mail is expected for this domain, validate MX configuration.');
+      }
+
+      if (answerCount(dnsRecords.TXT) > 0) {
+        var txtAll = dnsRecords.TXT.Answer.map(function (item) { return item.data || ''; }).join(' ');
+        if (/v=spf1/i.test(txtAll)) {
+          appendFinding(findings, 'info', 'SPF policy detected', 'TXT data includes SPF declaration.', 'Ensure SPF is paired with DMARC and DKIM enforcement.');
+        }
+      }
+
+      var score = computeRiskScore(findings);
+      var label = riskLabel(score);
+
+      riskScoreEl.textContent = String(score);
+      riskLabelEl.textContent = label.text;
+      riskLabelEl.className = label.className;
+      findingCountEl.textContent = String(findings.length);
+      dnsCountEl.textContent = String(totalDnsAnswers);
+      renderFindings(findings);
+      renderDns(dnsRecords);
+
+      metaTargetEl.textContent = url;
+      metaTimeEl.textContent = new Date().toISOString();
+      setStatus('Complete');
+    }
+
+    document.getElementById('run-scan').addEventListener('click', function () {
+      var value = (targetInput.value || '').trim();
+      if (!value) {
+        setError('Please enter a URL to continue.');
+        targetInput.focus();
+        return;
+      }
+
+      try {
+        var normalized = new URL(value).href;
+        targetInput.value = normalized;
+        updateHashTarget(normalized);
+        runScan(normalized);
+      } catch (err) {
+        setError('The value provided is not a valid URL.');
+        targetInput.focus();
+      }
+    });
+
+    targetInput.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        document.getElementById('run-scan').click();
+      }
+    });
+
+    document.getElementById('copy-link').addEventListener('click', async function () {
+      var value = (targetInput.value || '').trim();
+      if (!value) {
+        setError('Run a scan first to copy a report URL.');
+        return;
+      }
+
+      try {
+        var normalized = new URL(value).href;
+        var shareUrl = window.location.origin + "{{ '/online-passive-scanner/report.html' | relative_url }}" + '#q=' + encodeURIComponent(normalized);
+        await navigator.clipboard.writeText(shareUrl);
+        setError('');
+        setStatus('Link copied');
+      } catch (err) {
+        setError('Could not copy the report URL automatically.');
+      }
+    });
+
+    var initialTarget = currentHashTarget();
+    if (initialTarget) {
+      targetInput.value = initialTarget;
+      runScan(initialTarget);
+    } else {
+      setStatus('Waiting for target');
+      metaTargetEl.textContent = 'No target provided';
+      metaTimeEl.textContent = new Date().toISOString();
+      renderFindings([]);
+      renderDns({ A: null, AAAA: null, CAA: null, MX: null, NS: null, TXT: null });
+    }
+  })();
+</script>
