@@ -36,8 +36,10 @@ jobs:
               root / 'index.html',
               root / '404.html',
               root / 'passive-scanner' / 'index.html',
+              root / 'passive-scanner' / 'report' / 'index.html',
               root / 'online-passive-scanner' / 'index.html',
               root / 'online-passive-scanner' / 'report.html',
+              root / 'online-passive-scanner' / 'report-legacy.html',
           ]
           missing_html = [str(p) for p in html_files if not p.exists()]
           if missing_html:

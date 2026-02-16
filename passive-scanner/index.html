@@ -11,7 +11,7 @@ description: "Run the OWTF online passive scanner from a Jekyll-native page."
       <div class="max-w-3xl space-y-6">
         <p class="text-xs font-semibold uppercase tracking-[0.4em] text-slate-500">Passive scanner</p>
         <h1 class="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Scan a target URL</h1>
-        <p class="text-lg leading-relaxed text-slate-600">This Jekyll page launches OWTF's upstream online passive scanner and opens its report view for the URL you provide.</p>
+        <p class="text-lg leading-relaxed text-slate-600">Passive scanning reviews publicly exposed signals such as headers, metadata, and client-side behavior to surface likely security misconfigurations without active exploitation.</p>
       </div>
 
       <div class="mt-12 rounded-3xl border border-slate-200 bg-white p-8 shadow-card">
@@ -54,7 +54,7 @@ description: "Run the OWTF online passive scanner from a Jekyll-native page."
 
       try {
         var parsed = new URL(value);
-        var destination = '/online-passive-scanner/report.html#q=' + encodeURIComponent(parsed.href);
+        var destination = '/passive-scanner/report/#q=' + encodeURIComponent(parsed.href);
         window.location.assign(destination);
       } catch (err) {
         showError('The value provided is not a valid URL.');

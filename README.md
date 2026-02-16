@@ -42,3 +42,4 @@ The scanner is vendored at `/online-passive-scanner/` and is accessible at:
 A Jekyll-native launcher page is available at:
 
 - `/passive-scanner/`
+- `/passive-scanner/report/`
